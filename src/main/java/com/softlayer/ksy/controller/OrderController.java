@@ -1,5 +1,6 @@
 package com.softlayer.ksy.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,13 @@ import com.softlayer.ksy.service.VMService;
 
 @RestController
 public class OrderController {
+	
+	@Autowired
+	VMService vms;
+	
 	@RequestMapping(value = "/order/vm", method = RequestMethod.GET,produces = { MediaType.APPLICATION_JSON_VALUE })
 	public String createmeeting() {
-		VMService vms = new VMService();
+		
 		vms.OrderVM();
 		
 		return "\"{\"result\": \"SUCCESS\"}";
