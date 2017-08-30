@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.softlayer.api.*;
-//import com.softlayer.api.service.Location;
-//import com.softlayer.api.service.virtual.Guest;
+import com.softlayer.api.service.Account;
+import com.softlayer.api.service.Location;
+import com.softlayer.api.service.virtual.Guest;
 import com.softlayer.api.service.virtual.guest.block.device.Template;
 import com.softlayer.api.service.virtual.guest.block.device.template.Group;
 
@@ -22,23 +23,29 @@ public class VMService {
 
 		Gson gson = new Gson();
 		for (Group image : publicImages) {
-			if(image.getId() == (long) 1721449)
-			System.out.println(gson.toJson(image));
+			if (image.getId() == (long) 1721449)
+				System.out.println(gson.toJson(image));
 		}
 
-/*		Guest guest = new Guest();
+		Guest guest = new Guest();
 		guest.setHostname("test");
 		guest.setDomain("cloudtech03.sk.com");
 		guest.setStartCpus((long) 1);
 		guest.setMaxMemory((long) 1024);
 		guest.setHourlyBillingFlag(true);
-		guest.setOperatingSystemReferenceCode("UBUNTU_LATEST");
+		// guest.setOperatingSystemReferenceCode("UBUNTU_LATEST");
 		guest.setLocalDiskFlag(false);
 		guest.setDatacenter(new Location());
 		guest.getDatacenter().setName("seo01");
+
+		Account.Service accountService = Account.service(client);
+		for (Group blockGroup : accountService.getPrivateBlockDeviceTemplateGroups())
+			if ((long) 1721599 == blockGroup.getId())
+				guest.setBlockDeviceTemplateGroup(blockGroup);
+
 		guest = Guest.service(client).createObject(guest);
-		System.out.println("Virtual server ordered with ID: " + guest.getId());
-*/
+		System.out.println("Virtual server ordered with ID: " + guest.getId() + ", " + guest.getGlobalIdentifier());
+
 		// Guest.service(client).getOrderTemplate(template, guest);
 	}
 }
